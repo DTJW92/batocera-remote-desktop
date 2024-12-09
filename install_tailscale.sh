@@ -55,8 +55,10 @@ fi
 
 # Bring up Tailscale with specific options
 "$tailscale_dir/tailscale" up --advertise-routes=192.168.1.0/24 --snat-subnet-routes=false --accept-routes
-/userdata/tailscale/tailscaled -state /userdata/tailscale/state > /userdata/tailscale/tailscaled.log 2>&1 &/userdata/tailscale/tailscale up
 EOF
+
+/userdata/tailscale/tailscaled -state /userdata/tailscale/state > /userdata/tailscale/tailscaled.log 2>&1 &/userdata/tailscale/tailscale up
+wait
 
 batocera-services list
 batocera-services enable tailscale
