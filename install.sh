@@ -95,7 +95,13 @@ if [[ "$1" != "start" ]]; then
 fi
 
 # Start Sunshine with persistent configuration
-/userdata/system/sunshine.AppImage --config-dir /userdata/sunshine/config > /userdata/system/logs/sunshine.log 2>&1 &
+cd /userdata/system
+
+# save the name in cmd
+cmd=$(echo sunshine.AppImage)
+
+# run it
+./$cmd --config-dir /userdata/sunshine/config
 EOF
 
 chmod +x /userdata/system/services/sunshine
