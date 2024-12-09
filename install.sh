@@ -76,9 +76,14 @@ batocera-services start tailscale
 
 # Step 2: Install Sunshine
 echo "Installing Sunshine..."
-wget https://github.com/LizardByte/Sunshine/releases/download/v2024.1208.41026/sunshine.AppImage
+mkdir -p /userdata/system
+wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshine/releases/latest/download/sunshine.AppImage
 
-chmod +x /userdata/sunshine.AppImage
+chmod +x /userdata/system/sunshine.AppImage
+
+# Create a persistent configuration directory
+mkdir -p /userdata/sunshine/config
+mkdir -p /userdata/system/logs
 
 # Configure Sunshine as a service
 echo "Configuring Sunshine service..."
@@ -89,14 +94,14 @@ if [[ "$1" != "start" ]]; then
   exit 0
 fi
 
-# Start Sunshine
-cd /userdata/
-./sunshine.AppImage
+# Start Sunshine with persistent configuration
+/userdata/system/sunshine.AppImage --config-dir /userdata/sunshine/config > /userdata/system/logs/sunshine.log 2>&1 &
 EOF
 
 chmod +x /userdata/system/services/sunshine
 
+# Enable and start the Sunshine service
 batocera-services enable sunshine
 batocera-services start sunshine
 
-echo "Installation complete! Please head to https://YOUR.MACHINE.IP:47990 to pair Sunshine with Moonlight."
+echo "Installation complete! Please head to https://$(hostname -I | awk '{print $1}'):47990 to pair Sunshine with Moonlight."
