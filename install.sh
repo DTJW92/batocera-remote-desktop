@@ -77,7 +77,7 @@ batocera-services start tailscale
 # Step 2: Install Sunshine
 echo "Installing Sunshine..."
 mkdir -p /userdata/system
-wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshine/releases/latest/download/sunshine.AppImage
+wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshine/releases/download/v0.23.1/sunshine.AppImage
 
 chmod +x /userdata/system/sunshine.AppImage
 
