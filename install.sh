@@ -90,7 +90,8 @@ if [[ "$1" != "start" ]]; then
 fi
 
 # Start Sunshine
-./userdata/sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
+cd /userdata/
+./sunshine.AppImage
 EOF
 
 chmod +x /userdata/system/services/sunshine
