@@ -104,7 +104,7 @@ cmd=$(echo sunshine.AppImage)
 ./$cmd --config-dir /userdata/sunshine/config
 EOF
 
-chmod +x /userdata/system/services/sunshine
+chmod a+x /userdata/system/services/sunshine
 
 # Enable and start the Sunshine service
 batocera-services enable sunshine
