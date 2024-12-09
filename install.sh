@@ -26,7 +26,6 @@ echo "Configuring Tailscale service..."
 mkdir -p /userdata/system/services
 cat << 'EOF' > /userdata/system/services/tailscale
 #!/bin/bash
-export $(cat /proc/1/environ | tr '\0' '\n')
 
 if [[ "$1" != "start" ]]; then
   exit 0
@@ -85,6 +84,7 @@ mkdir -p /userdata/system/logs
 echo "Configuring Sunshine service..."
 cat << 'EOF' > /userdata/system/services/sunshine
 #!/bin/bash
+export $(cat /proc/1/environ | tr '\0' '\n')
 
 if [[ "$1" != "start" ]]; then
   exit 0
