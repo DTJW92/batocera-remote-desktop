@@ -91,25 +91,12 @@ if [[ "$1" != "start" ]]; then
   exit 0
 fi
 
-# Define the persistent config path
-PERSISTENT_CONFIG_PATH="/userdata/system/sunshine-config"
-RUNTIME_CONFIG_PATH="/.config/sunshine"
-
-# Ensure the persistent config directory exists
-mkdir -p "$PERSISTENT_CONFIG_PATH"
-
-# Restore Sunshine configuration only if the persistent config exists and is not empty
-if [ -d "$PERSISTENT_CONFIG_PATH" ] && [ "$(ls -A "$PERSISTENT_CONFIG_PATH")" ]; then
-  mkdir -p "$RUNTIME_CONFIG_PATH"
-  cp -r "$PERSISTENT_CONFIG_PATH"/* "$RUNTIME_CONFIG_PATH/"
-fi
+# Create symlink for Sunshine config
+ln -sf /userdata/system/sunshine-config/Sunshine ~/.config/Sunshine
 
 # Run Sunshine
 cd /userdata/system
 ./sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
-
-# Save Sunshine configuration back to persistent storage upon exit
-trap "mkdir -p \"$PERSISTENT_CONFIG_PATH\" && cp -r \"$RUNTIME_CONFIG_PATH\"/* \"$PERSISTENT_CONFIG_PATH\"/" EXIT
 
 EOF
 
