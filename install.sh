@@ -76,11 +76,9 @@ batocera-services start tailscale
 
 # Step 2: Install Sunshine
 echo "Installing Sunshine..."
-curl -s https://api.github.com/repos/LizardByte/Sunshine/releases/latest \
-| grep -oP '"browser_download_url": "\K.*Sunshine.*\.AppImage' \
-| xargs -n 1 curl -L -o /userdata/system/Sunshine.AppImage
+wget https://github.com/LizardByte/Sunshine/releases/download/v2024.1208.41026/sunshine.AppImage
 
-chmod +x /userdata/system/Sunshine.AppImage
+chmod +x /userdata/system/sunshine.AppImage
 
 # Configure Sunshine as a service
 echo "Configuring Sunshine service..."
@@ -92,7 +90,7 @@ if [[ "$1" != "start" ]]; then
 fi
 
 # Start Sunshine
-./userdata/system/Sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
+./userdata/system/sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
 EOF
 
 chmod +x /userdata/system/services/sunshine
