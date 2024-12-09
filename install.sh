@@ -78,6 +78,7 @@ chmod a+x /userdata/system/sunshine.AppImage
 
 # Create a persistent configuration directory
 mkdir -p /userdata/sunshine/config
+mkdir -p /userdata/system/sunshine-config
 mkdir -p /userdata/system/logs
 
 # Configure Sunshine as a service
@@ -92,13 +93,13 @@ fi
 
 # Define the persistent config path
 PERSISTENT_CONFIG_PATH="/userdata/system/sunshine-config"
-RUNTIME_CONFIG_PATH="/.config/sunshine"
+RUNTIME_CONFIG_PATH="$HOME/.config/Sunshine"
 
 # Ensure the persistent config directory exists
 mkdir -p "$PERSISTENT_CONFIG_PATH"
 
-# Restore Sunshine configuration to runtime location
-if [ -d "$PERSISTENT_CONFIG_PATH" ]; then
+# Restore Sunshine configuration only if the persistent config exists and is not empty
+if [ -d "$PERSISTENT_CONFIG_PATH" ] && [ "$(ls -A "$PERSISTENT_CONFIG_PATH")" ]; then
   mkdir -p "$RUNTIME_CONFIG_PATH"
   cp -r "$PERSISTENT_CONFIG_PATH"/* "$RUNTIME_CONFIG_PATH/"
 fi
@@ -108,8 +109,7 @@ cd /userdata/system
 ./sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
 
 # Save Sunshine configuration back to persistent storage upon exit
-# Use a trap to ensure this happens even if the script is terminated
-trap "cp -r \"$RUNTIME_CONFIG_PATH\"/* \"$PERSISTENT_CONFIG_PATH\"/" EXIT
+trap "mkdir -p \"$PERSISTENT_CONFIG_PATH\" && cp -r \"$RUNTIME_CONFIG_PATH\"/* \"$PERSISTENT_CONFIG_PATH\"/" EXIT
 
 EOF
 
