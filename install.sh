@@ -100,4 +100,4 @@ chmod +x /userdata/system/services/sunshine
 batocera-services enable sunshine
 batocera-services start sunshine
 
-echo "Installation complete! Please head to https://$(hostname -I | awk '{print $1}'):47990 to pair Sunshine with Moonlight."
+echo "Installation complete! Please head to https://YOUR.MACHINE.IP:47990 to pair Sunshine with Moonlight."
