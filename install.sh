@@ -93,7 +93,7 @@ fi
 
 # Define the persistent config path
 PERSISTENT_CONFIG_PATH="/userdata/system/sunshine-config"
-RUNTIME_CONFIG_PATH="$HOME/.config/sunshine"
+RUNTIME_CONFIG_PATH="/.config/sunshine"
 
 # Ensure the persistent config directory exists
 mkdir -p "$PERSISTENT_CONFIG_PATH"
