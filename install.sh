@@ -91,6 +91,14 @@ if [[ "$1" != "start" ]]; then
   exit 0
 fi
 
+# Create persistent directory for Sunshine config (if it doesn't exist)
+mkdir -p /userdata/system/sunshine-config/Sunshine
+
+# Check if Sunshine config exists (after the first run) and move it to persistent storage
+if [ -d ~/.config/sunshine ]; then
+  mv ~/.config/sunshine /userdata/system/sunshine-config/Sunshine
+fi
+
 # Create symlink for Sunshine config
 ln -sf /userdata/system/sunshine-config/Sunshine ~/.config/sunshine
 
