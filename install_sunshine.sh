@@ -52,5 +52,5 @@ EOF
 chmod +x /userdata/system/services/sunshine
 
 # Display informational message with instructions
-dialog --msgbox "Sunshine has been installed and set up as a service.\n\nPlease enable it in the services menu within system settings.\n\nAccess Sunshine web ui at https://your_batocera_ip:47990\n\nLogs can be found at /userdata/system/logs/sunshine.log" 12 50
+echo "Sunshine has been installed and set up as a service.\n\nPlease enable it in the services menu within system settings.\n\nAccess Sunshine web ui at https://your_batocera_ip:47990\n\nLogs can be found at /userdata/system/logs/sunshine.log" 12 50
 
