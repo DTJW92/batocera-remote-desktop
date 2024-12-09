@@ -1,18 +1,29 @@
 #!/bin/bash
-mkdir /userdata/temp
-cd /userdata/temp
-wget https://pkgs.tailscale.com/stable/tailscale_1.76.1_amd64.tgz
+
+# Step 1: Install Tailscale
+echo "Installing Tailscale..."
+mkdir -p /userdata/temp
+cd /userdata/temp || exit 1
+
+wget -q https://pkgs.tailscale.com/stable/tailscale_1.76.1_amd64.tgz
+
 tar -xf tailscale_1.76.1_amd64.tgz
-cd tailscale_1.76.1_amd64
-mkdir /userdata/tailscale
+cd tailscale_1.76.1_amd64 || exit 1
+
+mkdir -p /userdata/tailscale
+
 mv systemd /userdata/tailscale/systemd
 mv tailscale /userdata/tailscale/tailscale
 mv tailscaled /userdata/tailscale/tailscaled
-cd /userdata
-rm -rf temp
-mkdir /userdata/system/services
-touch /userdata/system/services/tailscale
-cat <<EOF > /userdata/system/services/tailscale
+
+# Cleanup temporary files
+cd /userdata || exit 1
+rm -rf /userdata/temp
+
+# Configure Tailscale as a service
+echo "Configuring Tailscale service..."
+mkdir -p /userdata/system/services
+cat << 'EOF' > /userdata/system/services/tailscale
 #!/bin/bash
 
 if [[ "$1" != "start" ]]; then
@@ -57,4 +68,19 @@ fi
 "$tailscale_dir/tailscale" up --advertise-routes=192.168.1.0/24 --snat-subnet-routes=false --accept-routes
 EOF
 
-/userdata/tailscale/tailscaled -state /userdata/tailscale/state > /userdata/tailscale/tailscaled.log 2>&1 &/userdata/tailscale/tailscale up
+chmod +x /userdata/system/services/tailscale
+
+# Enable and start the Tailscale service
+batocera-services enable tailscale
+batocera-services start tailscale
+
+# Step 2: Install Sunshine
+echo "Installing Sunshine..."
+curl -s https://api.github.com/repos/LizardByte/Sunshine/releases/latest \
+| grep -oP '"browser_download_url": "\K.*Sunshine.*\.AppImage' \
+| xargs -n 1 curl -L -o /userdata/Sunshine.AppImage
+
+chmod +x /userdata/Sunshine.AppImage
+/userdata/Sunshine.AppImage &
+
+echo "Installation complete! Please head to https://$(hostname -I | awk '{print $1}'):47990 to pair Sunshine with Moonlight."
