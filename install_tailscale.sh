@@ -58,8 +58,3 @@ fi
 EOF
 
 /userdata/tailscale/tailscaled -state /userdata/tailscale/state > /userdata/tailscale/tailscaled.log 2>&1 &/userdata/tailscale/tailscale up
-wait
-
-batocera-services list
-batocera-services enable tailscale
-reboot
