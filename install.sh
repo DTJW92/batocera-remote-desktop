@@ -77,9 +77,9 @@ batocera-services start tailscale
 # Step 2: Install Sunshine
 echo "Installing Sunshine..."
 mkdir -p /userdata/system
-wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshine/releases/download/v0.23.1/sunshine.AppImage
+wget https://github.com/LizardByte/Sunshine/releases/download/v0.23.1/sunshine.AppImage
 
-chmod +x /userdata/system/sunshine.AppImage
+chmod a+x /userdata/sunshine.AppImage
 
 # Create a persistent configuration directory
 mkdir -p /userdata/sunshine/config
@@ -95,13 +95,9 @@ if [[ "$1" != "start" ]]; then
 fi
 
 # Start Sunshine with persistent configuration
-cd /userdata/system
+cd /userdata/
+./sunshine.AppImage --config-dir /userdata/sunshine/config
 
-# save the name in cmd
-cmd=$(echo sunshine.AppImage)
-
-# run it
-./$cmd --config-dir /userdata/sunshine/config
 EOF
 
 chmod a+x /userdata/system/services/sunshine
