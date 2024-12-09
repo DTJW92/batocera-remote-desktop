@@ -55,17 +55,11 @@ EOL
 mv "$temp_sysctl_config" "$sysctl_config"
 sysctl -p "$sysctl_config"
 
-# Ensure Tailscale directories exist
-tailscale_dir="/userdata/tailscale"
-if [ ! -d "$tailscale_dir" ]; then
-  mkdir -p "$tailscale_dir"
-fi
-
 # Start Tailscale daemon
-"$tailscale_dir/tailscaled" -state "$tailscale_dir/state" > "$tailscale_dir/tailscaled.log" 2>&1 &
+/userdata/tailscale/tailscaled -state /userdata/tailscale/state > /userdata/tailscale/tailscaled.log 2>&1 &
 
 # Bring up Tailscale with specific options
-"$tailscale_dir/tailscale" up --advertise-routes=192.168.1.0/24 --snat-subnet-routes=false --accept-routes
+/userdata/tailscale/tailscale up --advertise-routes=192.168.1.0/24 --snat-subnet-routes=false --accept-routes
 EOF
 
 chmod +x /userdata/system/services/tailscale
@@ -77,9 +71,15 @@ batocera-services start tailscale
 # Step 2: Install Sunshine
 echo "Installing Sunshine..."
 mkdir -p /userdata/system
-wget https://github.com/LizardByte/Sunshine/releases/download/v0.23.1/sunshine.AppImage
+wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshine/releases/latest/download/sunshine.AppImage
 
-chmod a+x /userdata/sunshine.AppImage
+chmod a+x /userdata/system/sunshine.AppImage
+
+# Install missing dependencies
+echo "Installing dependencies..."
+BATOCERA_LIB_DIR="/lib:/usr/lib:/userdata/system/lib"
+export LD_LIBRARY_PATH=$BATOCERA_LIB_DIR:$LD_LIBRARY_PATH
+ln -s /lib/libc.so.6 /lib/libthai.so.0  # Workaround for missing library
 
 # Create a persistent configuration directory
 mkdir -p /userdata/sunshine/config
@@ -95,15 +95,13 @@ if [[ "$1" != "start" ]]; then
 fi
 
 # Start Sunshine with persistent configuration
-cd /userdata/
-./sunshine.AppImage --config-dir /userdata/sunshine/config
-
+LD_LIBRARY_PATH=/lib:/usr/lib:/userdata/system/lib /userdata/system/sunshine.AppImage --config-dir /userdata/sunshine/config > /userdata/system/logs/sunshine.log 2>&1 &
 EOF
 
-chmod a+x /userdata/system/services/sunshine
+chmod +x /userdata/system/services/sunshine
 
 # Enable and start the Sunshine service
 batocera-services enable sunshine
 batocera-services start sunshine
 
-echo "Installation complete! Please head to https://$(hostname -I | awk '{print $1}'):47990 to pair Sunshine with Moonlight."
+echo "Installation complete! Please head to https://YOUR-MACHINE-IP:47990 to pair Sunshine with Moonlight."
