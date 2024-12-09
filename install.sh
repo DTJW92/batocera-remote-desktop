@@ -75,12 +75,6 @@ wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshin
 
 chmod a+x /userdata/system/sunshine.AppImage
 
-# Install missing dependencies
-echo "Installing dependencies..."
-BATOCERA_LIB_DIR="/lib:/usr/lib:/userdata/system/lib"
-export LD_LIBRARY_PATH=$BATOCERA_LIB_DIR:$LD_LIBRARY_PATH
-ln -s /lib/libc.so.6 /lib/libthai.so.0  # Workaround for missing library
-
 # Create a persistent configuration directory
 mkdir -p /userdata/sunshine/config
 mkdir -p /userdata/system/logs
@@ -94,8 +88,9 @@ if [[ "$1" != "start" ]]; then
   exit 0
 fi
 
-# Start Sunshine with persistent configuration
-LD_LIBRARY_PATH=/lib:/usr/lib:/userdata/system/lib /userdata/system/sunshine.AppImage --config-dir /userdata/sunshine/config > /userdata/system/logs/sunshine.log 2>&1 &
+# Run Sunshine
+cd /userdata/system
+./sunshine.AppImage --config-dir /userdata/sunshine/config > /userdata/system/logs/sunshine.log 2>&1 &
 EOF
 
 chmod +x /userdata/system/services/sunshine
