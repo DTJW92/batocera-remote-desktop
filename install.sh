@@ -78,9 +78,9 @@ batocera-services start tailscale
 echo "Installing Sunshine..."
 curl -s https://api.github.com/repos/LizardByte/Sunshine/releases/latest \
 | grep -oP '"browser_download_url": "\K.*Sunshine.*\.AppImage' \
-| xargs -n 1 curl -L -o /userdata/Sunshine.AppImage
+| xargs -n 1 curl -L -o /userdata/system/Sunshine.AppImage
 
-chmod +x /userdata/Sunshine.AppImage
-/userdata/Sunshine.AppImage &
+chmod +x /userdata/system/Sunshine.AppImage
+./userdata/system/Sunshine.AppImage &
 
 echo "Installation complete! Please head to https://$(hostname -I | awk '{print $1}'):47990 to pair Sunshine with Moonlight."
