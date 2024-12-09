@@ -90,7 +90,7 @@ fi
 
 # Run Sunshine
 cd /userdata/system
-./sunshine.AppImage --config-dir /userdata/sunshine/config > /userdata/system/logs/sunshine.log 2>&1 &
+./sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
 EOF
 
 chmod +x /userdata/system/services/sunshine
