@@ -90,9 +90,27 @@ if [[ "$1" != "start" ]]; then
   exit 0
 fi
 
+# Define the persistent config path
+PERSISTENT_CONFIG_PATH="/userdata/system/sunshine-config"
+RUNTIME_CONFIG_PATH="/.config/Sunshine"
+
+# Ensure the persistent config directory exists
+mkdir -p "$PERSISTENT_CONFIG_PATH"
+
+# Restore Sunshine configuration to runtime location
+if [ -d "$PERSISTENT_CONFIG_PATH" ]; then
+  mkdir -p "$RUNTIME_CONFIG_PATH"
+  cp -r "$PERSISTENT_CONFIG_PATH"/* "$RUNTIME_CONFIG_PATH/"
+fi
+
 # Run Sunshine
 cd /userdata/system
 ./sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
+
+# Save Sunshine configuration back to persistent storage upon exit
+# Use a trap to ensure this happens even if the script is terminated
+trap "cp -r \"$RUNTIME_CONFIG_PATH\"/* \"$PERSISTENT_CONFIG_PATH\"/" EXIT
+
 EOF
 
 chmod +x /userdata/system/services/sunshine
