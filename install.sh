@@ -81,6 +81,23 @@ curl -s https://api.github.com/repos/LizardByte/Sunshine/releases/latest \
 | xargs -n 1 curl -L -o /userdata/system/Sunshine.AppImage
 
 chmod +x /userdata/system/Sunshine.AppImage
-./userdata/system/Sunshine.AppImage &
+
+# Configure Sunshine as a service
+echo "Configuring Sunshine service..."
+cat << 'EOF' > /userdata/system/services/sunshine
+#!/bin/bash
+
+if [[ "$1" != "start" ]]; then
+  exit 0
+fi
+
+# Start Sunshine
+/userdata/system/Sunshine.AppImage > /userdata/system/logs/sunshine.log 2>&1 &
+EOF
+
+chmod +x /userdata/system/services/sunshine
+
+batocera-services enable sunshine
+batocera-services start sunshine
 
 echo "Installation complete! Please head to https://$(hostname -I | awk '{print $1}'):47990 to pair Sunshine with Moonlight."
