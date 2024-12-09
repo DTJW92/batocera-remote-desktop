@@ -92,7 +92,7 @@ if [[ "$1" != "start" ]]; then
 fi
 
 # Create symlink for Sunshine config
-ln -sf /userdata/system/sunshine-config/Sunshine ~/.config/Sunshine
+ln -sf /userdata/system/sunshine-config/Sunshine ~/.config/sunshine
 
 # Run Sunshine
 cd /userdata/system
