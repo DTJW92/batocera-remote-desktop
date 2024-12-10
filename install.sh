@@ -86,6 +86,7 @@ echo "Configuring Sunshine service..."
 cat << 'EOF' > /userdata/system/services/sunshine
 #!/bin/bash
 export $(cat /proc/1/environ | tr '\0' '\n')
+export DISPLAY=:0.0
 
 if [[ "$1" != "start" ]]; then
   exit 0
