@@ -97,11 +97,12 @@ mkdir -p /userdata/system/sunshine-config/Sunshine
 
 # Check if Sunshine config exists (after the first run) and move it to persistent storage
 if [ -d ~/.config/sunshine ]; then
-  mv ~/.config/sunshine /userdata/system/sunshine-config/Sunshine
+  mv ~/.config/sunshine /userdata/system/sunshine-config/sunshine
 fi
 
-# Create symlink for Sunshine config
-ln -sf /userdata/system/sunshine-config/Sunshine ~/.config/sunshine
+if [ ! -L ~/.config/sunshine ]; then
+  ln -s /userdata/system/sunshine-config/sunshine ~/.config/sunshine
+fi
 
 # Run Sunshine
 cd /userdata/system
