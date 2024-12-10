@@ -19,7 +19,7 @@ It is recommended to do this via SSH, since you will need to manually authorise 
 
 ## You will need to go to the link provided by the Tailscale installer to authorise adding Tailscale to your acocunt, the install script will not proceed without it! 
 
-##Make sure you enable the Subnet Routes within the dashboard!
+### Make sure you enable the Subnet Routes within the dashboard!
 
 ## You will need to go to `https://192.168.1.##:47990` to set up credentials for Sunshine and link it with Moonlight (via Pin)!
 
