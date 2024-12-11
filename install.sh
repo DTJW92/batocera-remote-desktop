@@ -77,7 +77,6 @@ wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshin
 chmod a+x /userdata/system/sunshine.AppImage
 
 # Create a persistent configuration directory
-mkdir -p /userdata/sunshine/config
 mkdir -p /userdata/system/sunshine-config
 mkdir -p /userdata/system/logs
 
