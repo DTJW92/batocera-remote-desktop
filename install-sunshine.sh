@@ -11,6 +11,7 @@ mkdir -p /userdata/system/logs
 
 # Configure Sunshine as a service
 echo "Configuring Sunshine service..."
+mkdir -p /userdata/system/services
 cat << 'EOF' > /userdata/system/services/sunshine
 #!/bin/bash
 export $(cat /proc/1/environ | tr '\0' '\n')
