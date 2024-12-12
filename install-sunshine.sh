@@ -1,7 +1,7 @@
 # Step 1: Install Sunshine
 echo "Installing Sunshine..."
 mkdir -p /userdata/system
-wget -O /userdata/system/sunshine.AppImage https://github.com/LizardByte/Sunshine/releases/download/v2024.1208.41026/sunshine.AppImage
+wget -O /userdata/system/sunshine.AppImage  https://github.com/DTJW92/Remote-desktop/raw/main/sunshine.AppImage
 
 chmod a+x /userdata/system/sunshine.AppImage
 
