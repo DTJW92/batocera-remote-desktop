@@ -24,7 +24,7 @@ It is recommended to do this via SSH, since you will need to manually authorise 
 
 ### Make sure you enable the Subnet Routes within the dashboard!
 
-## You will need to go to `https://192.168.1.##:47990` to set up credentials for Sunshine and link it with Moonlight (via Pin)!
+## You will need to go to `https://YOUR-BATOCERA-IP:47990` to set up credentials for Sunshine and link it with Moonlight (via Pin)! Replace YOUR-BATOCERA-IP with the IP address of your machine.
 
 Local IP will still work, Tailscale needs to be installed for the device to access your Batocera system remotely. You can find the relevant IP address in the Tailscale dashboard.
 
