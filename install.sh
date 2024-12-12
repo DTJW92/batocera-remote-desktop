@@ -6,7 +6,7 @@ echo "Installing Tailscale..."
 mkdir -p /userdata/temp
 cd /userdata/temp || exit 1
 
-wget -q https://github.com/DTJW92/Remote-desktop/raw/main/sunshine.AppImage
+wget -q https://pkgs.tailscale.com/stable/tailscale_1.76.1_amd64.tgz
 
 tar -xf tailscale_1.76.1_amd64.tgz
 cd tailscale_1.76.1_amd64 || exit 1
