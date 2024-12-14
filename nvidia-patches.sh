@@ -35,8 +35,8 @@ if lspci | grep -i "nvidia" > /dev/null; then
     curl -L "https://raw.githubusercontent.com/keylase/nvidia-patch/master/patch-fbc.sh" -o "$TEMP_DIR/patch-fbc.sh"
 
     # Run the patch scripts with the detected driver version
-    bash "$TEMP_DIR/patch.sh" -d "$driver_version" -c "$driver_version"
-    bash "$TEMP_DIR/patch-fbc.sh" -d "$driver_version" -c "$driver_version"
+    bash "$TEMP_DIR/patch.sh" -d "$driver_version"
+    bash "$TEMP_DIR/patch-fbc.sh" -d "$driver_version"
     
 elif lspci | grep -i "amd" > /dev/null; then
     echo "AMD GPU detected. Skipping Nvidia patches."
