@@ -31,8 +31,8 @@ if lspci | grep -i "nvidia" > /dev/null; then
     echo "Detected Nvidia driver version: $driver_version"
     
     # Download the patch scripts to the temporary directory
-    curl -L "https://raw.githubusercontent.com/keylase/nvidia-patch/master/patch.sh" -o "$TEMP_DIR/patch.sh"
-    curl -L "https://raw.githubusercontent.com/keylase/nvidia-patch/master/patch-fbc.sh" -o "$TEMP_DIR/patch-fbc.sh"
+    curl -L "https://raw.githubusercontent.com/DTJW92/nvidia-patch/master/patch.sh" -o "$TEMP_DIR/patch.sh"
+    curl -L "https://raw.githubusercontent.com/DTJW92/nvidia-patch/refs/master/patch-fbc.sh" -o "$TEMP_DIR/patch-fbc.sh"
 
     # Run the patch scripts with the detected driver version
     bash "$TEMP_DIR/patch.sh" -d "$driver_version"
