@@ -24,19 +24,17 @@ if lspci | grep -i "nvidia" > /dev/null; then
     
     # Check if driver version was found
     if [[ -z "$driver_version" ]]; then
-        echo "Error: Could not detect Nvidia driver version. Please specify manually with -d VERSION."
+        echo "Error: Could not detect Nvidia driver version."
         exit 1
     fi
 
     echo "Detected Nvidia driver version: $driver_version"
     
     # Download the patch scripts to the temporary directory
-    curl -L "https://raw.githubusercontent.com/DTJW92/nvidia-patch/master/patch.sh" -o "$TEMP_DIR/patch.sh"
-    curl -L "https://raw.githubusercontent.com/DTJW92/nvidia-patch/master/patch-fbc.sh" -o "$TEMP_DIR/patch-fbc.sh"
+    curl -L "https://github.com/DTJW92/Remote-desktop/raw/main/batocera-sunshine-nvidia-patcher.sh" -o "$TEMP_DIR/nvidia_patch.sh"
 
     # Run the patch scripts with the detected driver version
-    bash "$TEMP_DIR/patch.sh" -d "$driver_version"
-    bash "$TEMP_DIR/patch-fbc.sh" -d "$driver_version"
+    bash "$TEMP_DIR/nvidia_patch.sh" "$driver_version"
     
 elif lspci | grep -i "amd" > /dev/null; then
     echo "AMD GPU detected. Skipping Nvidia patches."
