@@ -1,7 +1,7 @@
 # Step 1: Install Sunshine
 echo "Installing Sunshine..."
 mkdir -p /userdata/system
-wget -O /userdata/system/sunshine.AppImage  https://github.com/DTJW92/Remote-desktop/raw/main/sunshine.AppImage
+wget -q -O /userdata/system/sunshine.AppImage  https://github.com/DTJW92/Remote-desktop/raw/main/sunshine.AppImage
 
 chmod a+x /userdata/system/sunshine.AppImage
 
@@ -40,6 +40,9 @@ cd /userdata/system
 EOF
 
 chmod +x /userdata/system/services/sunshine
+
+# Apply Nvidia patches if necessary
+curl -L https://github.com/DTJW92/Remote-desktop/raw/main/nvidia-patches.sh | bash
 
 # Enable and start the Sunshine service
 batocera-services enable sunshine
