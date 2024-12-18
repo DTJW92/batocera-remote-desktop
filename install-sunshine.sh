@@ -111,6 +111,9 @@ curl -L https://github.com/DTJW92/Remote-desktop/raw/main/nvidia-patches.sh | ba
 batocera-services enable sunshine
 batocera-services start sunshine
 
-clear
 
+echo 
+echo
 echo "Installation complete! Please head to https://YOUR-MACHINE-IP:47990 to pair Sunshine with Moonlight if this is your first time running Sunshine :)"
+echo
+echo
