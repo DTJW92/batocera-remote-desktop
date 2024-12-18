@@ -16,8 +16,7 @@ cat << 'EOF' > /userdata/system/services/sunshine
 #!/bin/bash
 #
 # sunshine service script for Batocera
-# Functional start/stop/restart/status/uninstall
-# 20241217
+# Functional start/stop/restart/status/uninstall/update
 
 # Environment setup
 export $(cat /proc/1/environ | tr '\0' '\n')
