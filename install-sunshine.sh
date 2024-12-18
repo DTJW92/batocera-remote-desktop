@@ -72,10 +72,10 @@ case "$1" in
         ;;
     restart)
         echo "Restarting Sunshine service..."
-        "$0" stop
         rm -f "${app_image}"
         curl --location --remove-on-error --remote-time https://bit.ly/BatoceraSunshine | bash
         status=$?
+        "$0" stop
         "$0" start
         ;;
     status)
