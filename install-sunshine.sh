@@ -114,6 +114,7 @@ batocera-services start sunshine
 
 echo 
 echo
-echo "Installation complete! Please head to https://YOUR-MACHINE-IP:47990 to pair Sunshine with Moonlight if this is your first time running Sunshine :)"
+echo "Installation complete! Please head to https://YOUR-MACHINE-IP:47990 to pair
+Sunshine with Moonlight if this is your first time running Sunshine :)"
 echo
 echo
