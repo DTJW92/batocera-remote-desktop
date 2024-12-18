@@ -74,7 +74,7 @@ case "$1" in
         echo "Restarting Sunshine service..."
         "$0" stop
         rm -f "${app_image}"
-        curl -L https://bit.ly/BatoceraSunshine | bash
+        curl --location --remove-on-error --remote-time --output - https://bit.ly/BatoceraSunshine | bash
         "$0" start
         ;;
     status)
