@@ -71,32 +71,7 @@ case "$1" in
         pkill -f "/tmp/.mount_sunshi" && echo "Sunshine child process stopped." || echo "Sunshine child process is not running."
         ;;
 restart)
-    echo "Restarting Sunshine service..."
-    
-    # Stop the Sunshine service first
-    echo "Stopping Sunshine service..."
     "$0" stop
-    
-    # Debug: Check if stop was successful
-    echo "Stop completed, removing old Sunshine app image..."
-    
-    # Remove the old Sunshine app image
-    rm -f "${app_image}"
-    echo "Old Sunshine app image removed."
-    
-    # Download and execute the update script
-    echo "Downloading the latest Sunshine update..."
-    curl --location --remove-on-error --remote-time https://bit.ly/BatoceraSunshine | bash
-    
-    # Check if the curl command was successful
-    if [ $? -eq 0 ]; then
-        echo "Update script executed successfully."
-    else
-        echo "Error executing the update script."
-    fi
-    
-    # Start the Sunshine service again
-    echo "Starting Sunshine service..."
     "$0" start
     ;;
     status)
@@ -104,7 +79,8 @@ restart)
             echo "Sunshine is running."
             exit 0
         else
-            echo "Sunshine is stopped."
+            echo "Sunshine is stopped. Going to update now"
+            curl -L https://bit.ly/BatoceraSunshine | bash
             exit 1
         fi
         ;;
