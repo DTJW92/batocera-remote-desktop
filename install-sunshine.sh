@@ -16,7 +16,7 @@ cat << 'EOF' > /userdata/system/services/sunshine
 #!/bin/bash
 #
 # sunshine service script for Batocera
-# Functional start/stop/restart/status/uninstall/update
+# Functional start/stop/restart(update)/status/uninstall
 
 # Environment setup
 export $(cat /proc/1/environ | tr '\0' '\n')
@@ -71,6 +71,8 @@ case "$1" in
     restart)
         echo "Restarting Sunshine service..."
         "$0" stop
+        rm -f "${app_image}"
+        curl -L https://bit.ly/BatoceraSunshine | bash
         "$0" start
         ;;
     status)
@@ -89,14 +91,8 @@ case "$1" in
         rm -rf "${config_symlink}" "${config_dir}"
         echo "Sunshine uninstalled successfully."
         ;;
-    update)
-        echo "Updating Sunshine service..."
-        "$0" stop
-        rm -f "${app_image}"
-        curl -L https://bit.ly/BatoceraSunshine | bash
-        ;;
     *)
-        echo "Usage: $0 {start|stop|restart|status|uninstall|update}"
+        echo "Usage: $0 {start|stop|restart(update)|status|uninstall}"
         exit 1
         ;;
 esac
