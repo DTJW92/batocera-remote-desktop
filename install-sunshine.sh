@@ -66,7 +66,7 @@ case "$1" in
         ;;
     stop)
         echo "Stopping Sunshine service..."
-        pkill -f "sunshine.AppImage" && echo "Sunshine stopped." || echo "Sunshine is not running."
+        pkill -f sunshine && echo "Sunshine stopped." || echo "Sunshine is not running."
         ;;
     restart)
         echo "Restarting Sunshine service..."
