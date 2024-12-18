@@ -66,7 +66,9 @@ case "$1" in
         ;;
     stop)
         echo "Stopping Sunshine service..."
-        pkill -f sunshine && echo "Sunshine stopped." || echo "Sunshine is not running."
+        # Stop the specific processes for sunshine.AppImage
+        pkill -f "/userdata/system/sunshine.AppImage" && echo "Sunshine stopped." || echo "Sunshine is not running."
+        pkill -f "/tmp/.mount_sunshi" && echo "Sunshine child process stopped." || echo "Sunshine child process is not running."
         ;;
     restart)
         echo "Restarting Sunshine service..."
