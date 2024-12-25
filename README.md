@@ -13,8 +13,8 @@ This script automates the installation and configuration of Tailscale (for secur
    To install and configure both Tailscale and Sunshine, use the following command in your Batocera terminal:
 
 
-     ```curl -L https://bit.ly/BatoceraRDP | bash
-     ```
+        ```curl -L https://bit.ly/BatoceraRDP | bash
+         ```
    
  To install just Sunshine, without Tailscale, you can use the following command;
 
