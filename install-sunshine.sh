@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # Step 1: Install Sunshine
 echo "Installing Sunshine..."
