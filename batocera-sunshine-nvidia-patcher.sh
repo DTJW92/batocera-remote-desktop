@@ -10,7 +10,7 @@ echo
 echo -e "##  "
 echo -e "##  NOTE: "
 echo -e "##  if this process gets interrupted or errors out,  "
-echo -e "##  remove /userdata/system/sunshine/nvidia and start again "
+echo -e "##  remove /userdata/system/add-ons/sunshine/nvidia and start again "
 echo -e "##  "
 echo 
 # --------------------------------------------------------------------------------------------------------
@@ -19,8 +19,8 @@ patch_status="maybe"
 fbcpatch_status="maybe"
 mkdir -p /opt/nvidia 2>/dev/null 
 cookie=/tmp/patchstatus_ok ; rm $cookie 2>/dev/null
-tmp=/userdata/system/sunshine/nvidia/tmp ; rm -rf "$tmp" 2>/dev/null ; mkdir -p "$tmp" 2>/dev/null
-nvdir=/userdata/system/sunshine/nvidia/$version ; rm -rf "$nvdir" 2>/dev/null ; mkdir -p "$nvdir" 2>/dev/null 
+tmp=/userdata/system/add-ons/sunshine/nvidia/tmp ; rm -rf "$tmp" 2>/dev/null ; mkdir -p "$tmp" 2>/dev/null
+nvdir=/userdata/system/add-ons/sunshine/nvidia/$version ; rm -rf "$nvdir" 2>/dev/null ; mkdir -p "$nvdir" 2>/dev/null 
 # --------------------------------------------------------------------------------------------------------
 echo -e "##  "
 echo -e "##  downloading nvidia drivers version: $version "
@@ -55,12 +55,12 @@ cd "$tmp"
 				# But first try update nvidia patchers 
 				#
 				# patch.sh
-				nvpatch_file=/userdata/system/sunshine/nvidia/batocera-sunshine-nvidia-patch.sh
-				nvpatch_tmpfile=/userdata/system/sunshine/nvidia/tmp/batocera-sunshine-nvidia-patch.sh
+				nvpatch_file=/userdata/system/add-ons/sunshine/nvidia/batocera-sunshine-nvidia-patch.sh
+				nvpatch_tmpfile=/userdata/system/add-ons/sunshine/nvidia/tmp/batocera-sunshine-nvidia-patch.sh
 				nvpatch_link=https://raw.githubusercontent.com/keylase/nvidia-patch/master/patch.sh
 				# patch-fbc.sh
-				nvfbcpatch_file=/userdata/system/sunshine/nvidia/batocera-sunshine-nvidia-fbcpatch.sh
-				nvfbcpatch_tmpfile=/userdata/system/sunshine/nvidia/tmp/batocera-sunshine-nvidia-fbcpatch.sh
+				nvfbcpatch_file=/userdata/system/add-ons/sunshine/nvidia/batocera-sunshine-nvidia-fbcpatch.sh
+				nvfbcpatch_tmpfile=/userdata/system/add-ons/sunshine/nvidia/tmp/batocera-sunshine-nvidia-fbcpatch.sh
 				nvfbcpatch_link=https://raw.githubusercontent.com/keylase/nvidia-patch/master/patch-fbc.sh
 					curl -o "$nvpatch_tmpfile" --progress-bar "$nvpatch_link"
 					curl -o "$nvfbcpatch_tmpfile" --progress-bar "$nvfbcpatch_link"
