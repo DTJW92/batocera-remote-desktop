@@ -32,4 +32,4 @@ It is recommended to do this via SSH, since you will need to manually authorise 
 
 Local IP will still work, Tailscale needs to be installed for the device to access your Batocera system remotely. You can find the relevant IP address in the Tailscale dashboard.
 
-Any issues, you can reach out via the Batocera Nation discord https://discord.gg/XNxWHc6K4P
+Any issues, you can reach out via the Batocera Unofficial Add-Ons discord https://discord.gg/5sfHzMuQ
